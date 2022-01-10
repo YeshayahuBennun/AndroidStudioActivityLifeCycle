@@ -23,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
         showGuess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                startActivity(new Intent(MainActivity.this, ShowGuess.class));
+                Intent intent = new Intent(MainActivity.this, ShowGuess.class);
+                intent.putExtra("guess","Hello there");
+                startActivity(intent);
+                //startActivity(new Intent(MainActivity.this, ShowGuess.class));
             }
         });
 
