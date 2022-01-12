@@ -1,5 +1,6 @@
 package com.ybennun.activitylifecycle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button showGuess;
     private EditText enterGuess;
+    private final int REQUEST_CODE = 2;
 
 
     @Override
@@ -35,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("name", "bond");
                     intent.putExtra("age", 34);
 
-                    startActivity(intent);
+                    startActivityForResult(intent, REQUEST_CODE);
+                    //startActivity(intent);
 
                 } else {
                     Toast.makeText(MainActivity.this, "Enter guess", Toast.LENGTH_SHORT).show();
@@ -78,5 +81,18 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("Cycle", "onDestroy:");
 //        Toast.makeText(MainActivity.this, "onDestroy() Called", Toast.LENGTH_SHORT).show();
 //    }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_CODE) {
+            assert data != null;
+            String message = data.getStringExtra("message_back");
+
+            Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+
+        }
     }
 }
